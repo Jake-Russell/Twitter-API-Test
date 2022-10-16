@@ -68,13 +68,23 @@ def sentiment_analysis(text):
     ranking = np.argsort(scores)
     # Reverse Sort Order
     ranking = ranking[::-1]
+    rankings = []
     for i in range(len(scores)):
         label = labels[ranking[i]]
         score = scores[ranking[i]]
-        print(f"{i+1}) {label} {np.round(float(score), 4)}")
+        rankings.append([label, score])
+    return rankings
 
 
+positivity = []
 for processed_tweet in processed_tweets:
     print(processed_tweet)
-    sentiment_analysis(processed_tweet)
+
+    rankings = sentiment_analysis(processed_tweet)
+    for i in range(len(rankings)):
+        print(f"{i+1}) {rankings[i][0]} {np.round(float(rankings[i][1]), 4)}")
+        if rankings[i][0] == 'Positive':
+            positivity.append(rankings[i][1])
     print("\n")
+
+print(f"The average positivity for '{user_query}' is {np.round(float(np.mean(positivity)), 4)}")
