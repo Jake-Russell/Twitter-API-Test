@@ -13,13 +13,13 @@ client = tweepy.Client(bearer_token=bearer_token,
                        return_type=requests.Response,
                        wait_on_rate_limit=True)
 
-required_query_parameters = "lang:en"
+required_query_parameters = "lang:en -is:retweet"
 
 user_query = input("Enter the query: ")
 print("Now searching Twitter for Tweets with the following query: " + user_query)
 
 query = user_query + " " + required_query_parameters
-
+number_of_results = 100
 # query = 'from:jake_russell123'
 
 tweets = client.search_recent_tweets(query=query,
@@ -27,10 +27,12 @@ tweets = client.search_recent_tweets(query=query,
                                      expansions=['geo.place_id', 'author_id'],
                                      place_fields=['contained_within', 'country', 'country_code', 'full_name',
                                                    'id', 'name', 'place_type'],
-                                     max_results=10)
+                                     user_fields=['location', 'description'],
+                                     max_results=number_of_results)
 
 # Save data as a dictionary
 tweets_dict = tweets.json()
+print(tweets_dict)
 
 # Extract "data" value from dictionary
 has_tweet_data = True
@@ -46,13 +48,13 @@ except KeyError:
 try:
     tweets_users = tweets_dict['includes']['users']
 except KeyError:
-    print("No user data available")
+    print("No user data available for any of the returned tweets")
     has_tweet_users = False
 
 try:
     tweets_places = tweets_dict['includes']['places']
 except KeyError:
-    print("No location data available")
+    print("No location data available for any of the returned tweets")
     has_tweet_places = False
 
 if has_tweet_data:

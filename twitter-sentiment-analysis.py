@@ -21,6 +21,7 @@ user_query = input("Enter the query: ")
 print("Now searching Twitter for Tweets with the following query: " + user_query)
 
 query = user_query + " " + required_query_parameters
+number_of_results = 10
 # query = 'from:jake_russell123'
 
 tweets = client.search_recent_tweets(query=query,
@@ -28,7 +29,7 @@ tweets = client.search_recent_tweets(query=query,
                                      expansions=['geo.place_id', 'author_id'],
                                      place_fields=['contained_within', 'country', 'country_code', 'full_name',
                                                    'id', 'name', 'place_type'],
-                                     max_results=10)
+                                     max_results=number_of_results)
 
 
 # Preprocess text (username and link placeholders)
