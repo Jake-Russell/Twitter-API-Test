@@ -29,7 +29,7 @@ c.Retweets = False
 # c.Location = True
 # c.Near = "Swindon"
 # c.Geo = '52.77129,-1.21470,10000km'
-c.Limit = 1000                           # Number of Tweets to scrape
+c.Limit = 49                           # Number of Tweets to scrape
 c.Store_csv = True                       # Store tweets in a csv file
 c.Custom["tweet"] = ["date", "time", "username", "tweet", "place", "geo"]
 c.Output = output_file_name   # Path to csv file
@@ -54,9 +54,9 @@ def sentiment_analysis(tweet: Tweet):
     scores = output[0][0].numpy()
     scores = softmax(scores)
 
-    tweet.results = SentimentAnalysisResults(positive=np.round(float(scores[2]),4),
-                                             neutral=np.round(float(scores[1]),4),
-                                             negative=np.round(float(scores[0]),4))
+    tweet.results = SentimentAnalysisResults(positive=np.round(float(scores[2]), 4),
+                                             neutral=np.round(float(scores[1]), 4),
+                                             negative=np.round(float(scores[0]), 4))
 
 
 most_negative = 0
@@ -91,14 +91,14 @@ for tweet in Tweet.allTweets:
     else:
         positive_count += 1
 
-print(f"\nTotal Number of Positive Tweets - {positive_count}")
-print(f"Total Number of Neutral Tweets - {neutral_count}")
-print(f"Total Number of Negative Tweets - {negative_count}")
+print(f"\n😃 Total Number of Positive Tweets - {positive_count} ({np.round((positive_count/len(Tweet.allTweets))*100, 2)}%)")
+print(f"😐 Total Number of Neutral Tweets - {neutral_count} ({np.round((neutral_count/len(Tweet.allTweets))*100, 2)}%)")
+print(f"☹️ Total Number of Negative Tweets - {negative_count} ({np.round((negative_count/len(Tweet.allTweets))*100, 2)}%)")
 
-print(f"\nThe most negative Tweet is: '{most_negative_tweet.text}' by @{most_negative_tweet.username}, "
-      f"with a negativity of {most_negative}")
-print(f"The most positive Tweet is: '{most_positive_tweet.text}' by @{most_positive_tweet.username}, "
+print(f"😃 The most positive Tweet is: '{most_positive_tweet.text}' by @{most_positive_tweet.username}, "
       f"with a positivity of {most_positive}")
+print(f"\n☹️ The most negative Tweet is: '{most_negative_tweet.text}' by @{most_negative_tweet.username}, "
+      f"with a negativity of {most_negative}")
 
 
 
