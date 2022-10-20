@@ -1,15 +1,18 @@
 import csv
 from datetime import datetime
+from sentiment_analysis_results import SentimentAnalysisResults
 
 
 class Tweet:
     allTweets = []
 
-    def __init__(self, date_time: datetime, username: str, text: str, location: str):
+    def __init__(self, date_time: datetime, username: str, text: str, location: str,
+                 results: SentimentAnalysisResults = None):
         self.date_time = date_time
         self.username = username
         self.text = text
         self.location = location
+        self.results = results
 
         Tweet.allTweets.append(self)
 
