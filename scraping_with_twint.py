@@ -91,15 +91,27 @@ for tweet in Tweet.allTweets:
     else:
         positive_count += 1
 
-print(f"\n😃 Total Number of Positive Tweets - {positive_count} ({np.round((positive_count/len(Tweet.allTweets))*100, 2)}%)")
-print(f"😐 Total Number of Neutral Tweets - {neutral_count} ({np.round((neutral_count/len(Tweet.allTweets))*100, 2)}%)")
-print(f"☹️ Total Number of Negative Tweets - {negative_count} ({np.round((negative_count/len(Tweet.allTweets))*100, 2)}%)")
+print("\n-----------------------------------------------------------------------------------"
+      "-----------------------------------------------------------------------------------"
+      "-----------------------------------------------------------------------------------")
+print(f"😃 Total Number of Positive Tweets - {positive_count} "
+      f"({np.round((positive_count/len(Tweet.allTweets))*100, 2)}%)")
+print(f"😐 Total Number of Neutral Tweets - {neutral_count} "
+      f"({np.round((neutral_count/len(Tweet.allTweets))*100, 2)}%)")
+print(f"☹️ Total Number of Negative Tweets - {negative_count} "
+      f"({np.round((negative_count/len(Tweet.allTweets))*100, 2)}%)")
+print("-----------------------------------------------------------------------------------"
+      "-----------------------------------------------------------------------------------"
+      "-----------------------------------------------------------------------------------")
 
-print(f"😃 The most positive Tweet is: '{most_positive_tweet.text}' by @{most_positive_tweet.username}, "
-      f"with a positivity of {most_positive}")
-print(f"\n☹️ The most negative Tweet is: '{most_negative_tweet.text}' by @{most_negative_tweet.username}, "
-      f"with a negativity of {most_negative}")
+print(f"""😃 The most positive Tweet is: '{most_positive_tweet.text}' 
+   By: @{most_positive_tweet.username}
+   Positivity: {most_positive}""")
 
+print(f"""
+☹️ The most negative Tweet is: '{most_negative_tweet.text}' 
+   By: @{most_negative_tweet.username}
+   Negativity: {most_negative}""")
 
 
 # positivity = []
